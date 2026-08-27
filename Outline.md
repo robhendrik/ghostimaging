@@ -41,7 +41,7 @@ The fringes were real. The photon that made them was never there.
 > **The photon that creates the interference pattern never passed through the slits. Its entangled partner did — and was detected by a device that recorded no image at all.**
 
 <!-- FIGURE 1 -->
-
+![ghost_imaging_far_field_schematic.png](ghost_imaging_far_field_schematic.png)
 **Figure 1. The ghost double-slit experiment.** One photon passes through a double slit and reaches a detector with no spatial resolution (the bucket detector, which simply clicks). Its entangled partner travels to a scanning detector without ever encountering the slits. Neither detector shows fringes alone. The interference pattern appears only in the coincidences between them.
 
 *Alt text: Schematic of a ghost interference experiment. A source produces entangled photon pairs. One path contains a double slit followed by a single-pixel bucket detector. The other path leads to a scanning detector. An arrow labelled "coincidences" connects the two detectors to a graph showing an interference pattern.*
@@ -79,10 +79,12 @@ Which raises an uncomfortable question. If a classical optical picture explains 
 > **Unfold the entangled pair into a single classical light path and ordinary optics predicts every detail of the ghost.**
 
 <!-- FIGURE 2 -->
+![klyshko_ghost_imaging_schematic.png](klyshko_ghost_imaging_schematic.png)
+**Figure 2. Top: the two-photon ghost experiment. Bottom: replace the bucket detector with a light source and the SPDC crystal with a mirror, and the two arms unfold into a single classical optical path from the source, through the double slit, to the camera. The ordinary optical system reproduces the geometry of the ghost experiment.**
 
-**Figure 2. The Klyshko picture.** Replace the crystal with a mirror and the bucket detector with a light source. The two-photon ghost experiment unfolds into a single classical light path: source → slits → mirror → camera. The classical prediction matches the ghost result exactly.
+Top: the two-photon ghost experiment. Bottom: replace the bucket detector with a light source and the SPDC crystal with a mirror, and the two arms unfold into a single classical optical path from the source, through the double slit, to the camera. The ordinary optical system reproduces the geometry of the ghost experiment.
 
-*Alt text: Two side-by-side diagrams. On the left, the ghost imaging setup with a crystal, bucket detector, and scanning detector. On the right, the Klyshko equivalent: the bucket detector is replaced by a light source, the crystal by a mirror, and a single light path passes through the slits to the camera. An equals sign connects the two diagrams.*
+*Alt text: Two vertically stacked diagrams. The upper diagram shows a UV laser pumping an SPDC crystal, producing two correlated photon paths: one passes through a double slit to a bucket detector while the other reaches a camera, with both detections sent to a coincidence correlator. The lower diagram shows the Klyshko equivalent: a light source replaces the bucket detector, a mirror replaces the SPDC crystal, and a single optical path runs backward through the double slit to the mirror and then forward to the camera.*
 
 ---
 
@@ -99,10 +101,10 @@ The apparatus is now stripped to its minimum: a projector, an object, a single-p
 > **Remove the entanglement. Remove the second beam. Replace the camera with a calculation. The ghost image remains.**
 
 <!-- FIGURE 3 -->
+![ghost_imaging_three_stages.png](ghost_imaging_three_stages.png)
+**Figure 3. Making the ghost classical. Three stages of ghost imaging. Left: entangled photon pairs and two detectors. Centre: classically correlated speckle beams and two detectors. Right: computational ghost imaging — a projector, one bucket detector, and a computer. The image survives as the quantum components are stripped away.**
 
-**Figure 3. Making the ghost classical.** Three stages of ghost imaging. Left: entangled photon pairs and two detectors. Centre: classically correlated speckle beams and two detectors. Right: computational ghost imaging — a projector, one bucket detector, and a computer. The image survives as the quantum components are stripped away.
-
-*Alt text: Three-panel diagram showing progressive simplification. Panel one uses entangled photon pairs with two detectors. Panel two replaces entanglement with a beam splitter creating classical speckle copies. Panel three removes the second beam entirely: structured illumination, a bucket detector, and a computer. All three panels produce the same reconstructed image.*
+*Alt-text: Three-panel diagram showing progressive simplification. Panel one uses entangled photon pairs with two detectors. Panel two replaces entanglement with a beam splitter creating classical speckle copies. Panel three removes the second beam entirely: structured illumination, a bucket detector, and a computer. All three panels produce the same reconstructed image.*
 
 ---
 

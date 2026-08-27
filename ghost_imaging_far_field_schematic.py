@@ -29,6 +29,9 @@ from matplotlib.patches import PathPatch
 
 FIGSIZE = (14, 8.2)
 DPI = 220
+import os
+print(os.getcwd())
+os.chdir("GhostImaging")
 OUT_PNG = "ghost_imaging_far_field_schematic.png"
 OUT_PDF = "ghost_imaging_far_field_schematic.pdf"
 FONT_MAIN = 12
@@ -54,9 +57,10 @@ def add_beam(ax, start, end, color, lw=2.5, alpha=0.9, zorder=2):
 
 
 def add_lens(ax, center, height=0.9, width=0.22):
-    x, y = center
-    ax.add_patch(Ellipse((x, y), width=width, height=height, facecolor="0.92",
-                         edgecolor="0.15", linewidth=1.4, zorder=5))
+    return
+    #x, y = center
+    #ax.add_patch(Ellipse((x, y), width=width, height=height, facecolor="0.92",
+    #                     edgecolor="0.15", linewidth=1.4, zorder=5))
 
 
 def add_spdc_crystal(ax, center, width=0.42, height=0.9):
@@ -129,8 +133,8 @@ def add_plot_panel(ax, xywh, title, bordercolor, mode):
                                 linewidth=1.35, zorder=2))
     ax.text(x+w/2, y+h-0.13, title, ha="center", va="top", fontsize=FONT_SMALL+1,
             color=bordercolor, weight="bold")
-    px0, px1 = x+0.13*w, x+0.91*w
-    py0, py1 = y+0.23*h, y+0.67*h
+    px0, px1 = x+0.20*w, x+0.91*w
+    py0, py1 = y+0.30*h, y+0.70*h
     ax.plot([px0, px1], [py0, py0], color="0.15", lw=1.0, zorder=3)
     ax.plot([px0, px0], [py0, py1], color="0.15", lw=1.0, zorder=3)
 
@@ -151,7 +155,7 @@ def add_plot_panel(ax, xywh, title, bordercolor, mode):
         xs = rng.uniform(px0, px1, n)
         ys = rng.uniform(py0+0.02*h, py1-0.02*h, n)
         ax.scatter(xs, ys, s=3.0, color=COLOR_B, alpha=0.60, zorder=4)
-        subtitle = "Camera alone — no ghost pattern"
+        subtitle = "Camera alone — no interference pattern"
         ax.text(px1, py0-0.04*h, "time", ha="right", va="top", fontsize=FONT_SMALL)
         ax.text(px0-0.02*w, py1, "position", ha="right", va="top", fontsize=FONT_SMALL)
 
@@ -193,18 +197,15 @@ def make_figure():
 
     # Photon A: double-slit -> bucket detector
     a_lens_1 = (4.75, 6.25)
-    slit = (6.35, 6.60)
+    slit = (8.16, 6.45)
     a_lens_2 = (8.15, 6.65)
-    bucket = (10.45, 6.65)
-    add_beam(ax, crystal, a_lens_1, COLOR_A)
-    add_beam(ax, a_lens_1, slit, COLOR_A)
-    add_beam(ax, slit, a_lens_2, COLOR_A)
-    add_beam(ax, a_lens_2, (10.15, 6.65), COLOR_A)
+    bucket = (10.6, 6.65)
+    add_beam(ax, crystal, (10.15, 6.65), COLOR_A)
     add_lens(ax, a_lens_1)
     add_double_slit(ax, slit)
     add_lens(ax, a_lens_2, height=0.82)
     add_bucket_detector(ax, bucket)
-    ax.text(4.45, 6.83, "Photon A", color=COLOR_A, fontsize=FONT_LABEL, weight="bold")
+    ax.text(4.45, 6.43, "Photon A", color=COLOR_A, fontsize=FONT_LABEL, weight="bold")
     ax.text(slit[0], slit[1]+0.70, "double slit", ha="center", fontsize=FONT_LABEL)
     ax.text(bucket[0]+0.08, bucket[1]-0.72, "bucket detector\n(no spatial resolution)",
             ha="center", va="top", fontsize=FONT_SMALL+1)
@@ -212,39 +213,29 @@ def make_figure():
     # Photon B: far-field arm only, directly to camera
     b_lens = (5.05, 4.95)
     camera = (10.65, 4.80)
-    add_beam(ax, crystal, b_lens, COLOR_B)
-    add_beam(ax, b_lens, (10.10, 4.85), COLOR_B)
-    add_lens(ax, b_lens)
+    add_beam(ax, crystal, (10.10, 4.85), COLOR_B)
     add_camera(ax, camera)
-    ax.text(4.25, 4.48, "Photon B", color=COLOR_B, fontsize=FONT_LABEL, weight="bold")
-    ax.text(5.28, 4.67, "far-field lens", fontsize=FONT_SMALL, color="0.25")
+    ax.text(4.25, 4.88, "Photon B", color=COLOR_B, fontsize=FONT_LABEL, weight="bold")
+    
     ax.text(camera[0], camera[1]-0.62, "camera\n(position-sensitive)",
             ha="center", va="top", fontsize=FONT_SMALL+1)
-    ax.text(7.45, 4.40, "never encounters the slits", color=COLOR_B,
-            fontsize=FONT_SMALL, ha="center", style="italic")
+  
 
     # Coincidence/correlation electronics
     corr = (12.35, 5.65)
     add_correlation_box(ax, corr)
     add_curved_wire(ax, (10.72, 6.72), (11.52, 5.86))
     add_curved_wire(ax, (11.02, 4.82), (11.52, 5.47))
-    ax.text(12.35, 4.95, "compare detections\nin the same time window",
-            ha="center", va="top", fontsize=FONT_SMALL, color="0.35")
 
     # Lower explanatory panels
-    add_plot_panel(ax, (0.55, 0.55, 3.55, 1.75), "Bucket detector", COLOR_A, "bucket")
-    add_plot_panel(ax, (5.05, 0.55, 3.75, 1.75), "Camera", COLOR_B, "camera")
-    add_plot_panel(ax, (9.55, 0.55, 3.90, 1.75), "Coincidences", COLOR_PUMP, "coincidence")
+    add_plot_panel(ax, (0.55, 0.55, 3.95, 1.85), "Bucket detector", COLOR_A, "bucket")
+    add_plot_panel(ax, (5.05, 0.55, 3.95, 1.85), "Camera", COLOR_B, "camera")
+    add_plot_panel(ax, (9.55, 0.55, 3.95, 1.85), "Coincidences", COLOR_PUMP, "coincidence")
 
-    ax.text(7.0, 7.78, "The camera never sees the double slit",
-            ha="center", va="center", fontsize=FONT_TITLE, weight="bold", color="0.12")
-    ax.text(7.0, 7.42,
-            "One photon encounters the object; its correlated partner reaches the camera. "
-            "The pattern appears only after their detections are compared.",
-            ha="center", va="center", fontsize=FONT_MAIN, color="0.30")
-    ax.text(7.1, 3.22, "Neither detector contains the ghost pattern on its own",
+
+    ax.text(7.1, 3.22, "Neither detector contains the interference pattern on its own",
             ha="center", va="center", fontsize=FONT_LABEL, color="0.22", weight="bold")
-    ax.text(11.5, 0.22, "The ghost emerges in the correlation",
+    ax.text(11.5, 0.22, "The pattern emerges in the correlation",
             ha="center", va="bottom", fontsize=FONT_LABEL, color=COLOR_PUMP, weight="bold")
 
     fig.tight_layout(pad=0.2)
