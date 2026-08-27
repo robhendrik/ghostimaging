@@ -404,21 +404,21 @@ def add_panel_footer(ax, x, y, w, text):
 def draw_quantum_panel(ax, x0, y0, w, h):
     add_panel_box(ax, x0, y0, w, h, "Entangled photons")
 
-    crystal = (x0 + 1.10, y0 + 2.20)
-    slit = (x0 + 2.85, y0 + 2.55)
-    bucket = (x0 + 4.15, y0 + 2.55)
-    camera = (x0 + 4.10, y0 + 1.55)
+    crystal = (x0 + 0.7, y0 + 2.20)
+    slit = (x0 + 2.6, y0 + 2.55)
+    bucket = (x0 + 3.6, y0 + 2.55)
+    camera = (x0 + 3.6, y0 + 1.55)
 
     # Pump + crystal
-    add_arrow(ax, (x0 + 0.20, y0 + 2.20), (x0 + 0.72, y0 + 2.20), color=COLOR_Q, lw=2.6)
-    add_beam(ax, (x0 + 0.72, y0 + 2.20), (x0 + 0.95, y0 + 2.20), COLOR_Q, lw=2.6, alpha=0.55)
-    ax.text(x0 + 0.22, y0 + 2.46, "UV", color=COLOR_Q, fontsize=FONT_SMALL + 0.5, ha="left")
+    #add_arrow(ax, (x0 + 0.20, y0 + 2.20), (x0 + 0.72, y0 + 2.20), color=COLOR_Q, lw=2.6)
+    #add_beam(ax, (x0 + 0.72, y0 + 2.20), (x0 + 0.95, y0 + 2.20), COLOR_Q, lw=2.6, alpha=0.55)
+    #ax.text(x0 + 0.22, y0 + 2.46, "UV", color=COLOR_Q, fontsize=FONT_SMALL + 0.5, ha="left")
     add_spdc_crystal(ax, crystal)
     ax.text(crystal[0], crystal[1] + 0.58, "SPDC", ha="center", fontsize=FONT_SMALL)
 
     # Two arms
-    add_beam(ax, crystal, (x0 + 3.95, y0 + 2.55), COLOR_A)
-    add_beam(ax, crystal, (x0 + 3.95, y0 + 1.58), COLOR_B)
+    add_beam(ax, crystal, (bucket[0] - 0.05, bucket[1]), COLOR_A)
+    add_beam(ax, crystal, (camera[0] - 0.05, camera[1]), COLOR_B)
 
     add_double_slit(ax, slit)
     ax.text(slit[0], slit[1] + 0.55, "double slit", ha="center", fontsize=FONT_SMALL)
@@ -428,29 +428,29 @@ def draw_quantum_panel(ax, x0, y0, w, h):
     ax.text(bucket[0], bucket[1] + 0.45, "bucket", ha="center", fontsize=FONT_SMALL)
     ax.text(camera[0], camera[1] - 0.48, "camera", ha="center", fontsize=FONT_SMALL)
 
-    # Coincidence box
-    corr_x, corr_y = x0 + 4.95, y0 + 2.05
-    ax.add_patch(
-        FancyBboxPatch(
-            (corr_x - 0.55, corr_y - 0.23),
-            1.10,
-            0.46,
-            boxstyle="round,pad=0.02,rounding_size=0.05",
-            facecolor="0.98",
-            edgecolor=COLOR_Q,
-            linewidth=1.2,
-            zorder=5,
-        )
-    )
-    ax.text(corr_x, corr_y + 0.04, "coincidence", ha="center", va="center",
-            fontsize=FONT_SMALL, weight="bold", color=COLOR_Q)
-    ax.text(corr_x, corr_y - 0.10, "correlation", ha="center", va="center",
-            fontsize=FONT_SMALL, color=COLOR_Q)
+    # # Coincidence box
+    # corr_x, corr_y = x0 + 4.95, y0 + 2.05
+    # ax.add_patch(
+    #     FancyBboxPatch(
+    #         (corr_x - 0.55, corr_y - 0.23),
+    #         1.10,
+    #         0.46,
+    #         boxstyle="round,pad=0.02,rounding_size=0.05",
+    #         facecolor="0.98",
+    #         edgecolor=COLOR_Q,
+    #         linewidth=1.2,
+    #         zorder=5,
+    #     )
+    # )
+    # ax.text(corr_x, corr_y + 0.04, "coincidence", ha="center", va="center",
+    #         fontsize=FONT_SMALL, weight="bold", color=COLOR_Q)
+    # ax.text(corr_x, corr_y - 0.10, "correlation", ha="center", va="center",
+    #         fontsize=FONT_SMALL, color=COLOR_Q)
 
-    add_arrow(ax, (bucket[0] + 0.26, bucket[1]), (corr_x - 0.58, corr_y + 0.10), color="0.25", lw=1.4)
-    add_arrow(ax, (camera[0] + 0.30, camera[1]), (corr_x - 0.58, corr_y - 0.10), color="0.25", lw=1.4)
+    #add_arrow(ax, (bucket[0] + 0.26, bucket[1]), (corr_x - 0.58, corr_y + 0.10), color="0.25", lw=1.4)
+    #add_arrow(ax, (camera[0] + 0.30, camera[1]), (corr_x - 0.58, corr_y - 0.10), color="0.25", lw=1.4)
 
-    add_small_ghost_image(ax, (x0 + 4.55, y0 + 0.42))
+    # add_small_ghost_image(ax, (x0 + 4.55, y0 + 0.42))
     add_panel_footer(ax, x0, y0 + 0.22, w, "Two photons, two detectors, one image in their correlations")
 
 
@@ -458,31 +458,31 @@ def draw_classical_panel(ax, x0, y0, w, h):
     add_panel_box(ax, x0, y0, w, h, "Classical speckle")
 
     laser = (x0 + 0.48, y0 + 2.20)
-    diffuser = (x0 + 1.15, y0 + 2.20)
+    diffuser = (x0 + 0.7, y0 + 2.20)
     bs = (x0 + 2.10, y0 + 2.10)
-    slit = (x0 + 3.10, y0 + 2.55)
-    bucket = (x0 + 4.25, y0 + 2.55)
-    camera = (x0 + 4.25, y0 + 1.55)
+    slit = (x0 + 2.6, y0 + 2.55)
+    bucket = (x0 + 3.6, y0 + 2.55)
+    camera = (x0 + 3.6, y0 + 1.55)
 
-    # Laser
-    add_arrow(ax, (laser[0] - 0.28, laser[1]), (laser[0] + 0.10, laser[1]), color=COLOR_CLASSICAL, lw=2.6)
-    ax.text(laser[0] - 0.32, laser[1] + 0.26, "laser", fontsize=FONT_SMALL, color=COLOR_CLASSICAL, ha="left")
+    # # Laser
+    # add_arrow(ax, (laser[0] - 0.28, laser[1]), (laser[0] + 0.10, laser[1]), color=COLOR_CLASSICAL, lw=2.6)
+    # ax.text(laser[0] - 0.32, laser[1] + 0.26, "laser", fontsize=FONT_SMALL, color=COLOR_CLASSICAL, ha="left")
 
     # Rotating diffuser / ground glass
     add_ground_glass(ax, diffuser)
-    ax.text(diffuser[0], diffuser[1] + 0.60, "ground glass", ha="center", fontsize=FONT_SMALL)
+    ax.text(diffuser[0], diffuser[1] + 0.60, "speckle pattern", ha="center", fontsize=FONT_SMALL)
 
     # Beam to beam splitter
-    add_beam(ax, (laser[0] + 0.10, laser[1]), (diffuser[0] - 0.17, diffuser[1]), COLOR_CLASSICAL, lw=2.4, alpha=0.6)
-    add_beam(ax, (diffuser[0] + 0.17, diffuser[1]), (bs[0] - 0.05, bs[1]), COLOR_CLASSICAL, lw=2.4, alpha=0.75)
+    # add_beam(ax, (laser[0] + 0.10, laser[1]), (diffuser[0] - 0.17, diffuser[1]), COLOR_CLASSICAL, lw=2.4, alpha=0.6)
+    # add_beam(ax, (diffuser[0] + 0.17, diffuser[1]), (bs[0] - 0.05, bs[1]), COLOR_CLASSICAL, lw=2.4, alpha=0.75)
 
     # Beam splitter
-    add_beam_splitter(ax, bs)
-    ax.text(bs[0], bs[1] - 0.50, "beam splitter", ha="center", fontsize=FONT_SMALL)
+    #add_beam_splitter(ax, bs)
+    #ax.text(bs[0], bs[1] - 0.50, "beam splitter", ha="center", fontsize=FONT_SMALL)
 
     # Split beams
-    add_beam(ax, (bs[0] + 0.10, bs[1] + 0.10), (x0 + 4.05, y0 + 2.55), COLOR_A)
-    add_beam(ax, (bs[0] + 0.10, bs[1] - 0.10), (x0 + 4.05, y0 + 1.58), COLOR_B)
+    add_beam(ax, (diffuser[0] + 0.17, diffuser[1]), (bucket[0] - 0.05, bucket[1]), COLOR_A)
+    add_beam(ax, (diffuser[0] + 0.17, diffuser[1]), (camera[0] - 0.05, camera[1]), COLOR_B)
 
     add_double_slit(ax, slit)
     ax.text(slit[0], slit[1] + 0.55, "double slit", ha="center", fontsize=FONT_SMALL)
@@ -491,26 +491,26 @@ def draw_classical_panel(ax, x0, y0, w, h):
     ax.text(bucket[0], bucket[1] + 0.45, "bucket", ha="center", fontsize=FONT_SMALL)
     ax.text(camera[0], camera[1] - 0.48, "camera", ha="center", fontsize=FONT_SMALL)
 
-    # correlation / computer block
-    corr_x, corr_y = x0 + 5.00, y0 + 2.05
-    ax.add_patch(
-        FancyBboxPatch(
-            (corr_x - 0.52, corr_y - 0.23),
-            1.04,
-            0.46,
-            boxstyle="round,pad=0.02,rounding_size=0.05",
-            facecolor="0.98",
-            edgecolor=COLOR_CLASSICAL,
-            linewidth=1.2,
-            zorder=5,
-        )
-    )
-    ax.text(corr_x, corr_y + 0.02, "correlate", ha="center", va="center",
-            fontsize=FONT_SMALL, weight="bold", color=COLOR_CLASSICAL)
-    add_arrow(ax, (bucket[0] + 0.26, bucket[1]), (corr_x - 0.54, corr_y + 0.10), color="0.25", lw=1.4)
-    add_arrow(ax, (camera[0] + 0.30, camera[1]), (corr_x - 0.54, corr_y - 0.10), color="0.25", lw=1.4)
+    # # correlation / computer block
+    # corr_x, corr_y = x0 + 5.00, y0 + 2.05
+    # ax.add_patch(
+    #     FancyBboxPatch(
+    #         (corr_x - 0.52, corr_y - 0.23),
+    #         1.04,
+    #         0.46,
+    #         boxstyle="round,pad=0.02,rounding_size=0.05",
+    #         facecolor="0.98",
+    #         edgecolor=COLOR_CLASSICAL,
+    #         linewidth=1.2,
+    #         zorder=5,
+    #     )
+    # )
+    # ax.text(corr_x, corr_y + 0.02, "correlate", ha="center", va="center",
+    #         fontsize=FONT_SMALL, weight="bold", color=COLOR_CLASSICAL)
+    # add_arrow(ax, (bucket[0] + 0.26, bucket[1]), (corr_x - 0.54, corr_y + 0.10), color="0.25", lw=1.4)
+    # add_arrow(ax, (camera[0] + 0.30, camera[1]), (corr_x - 0.54, corr_y - 0.10), color="0.25", lw=1.4)
 
-    add_small_ghost_image(ax, (x0 + 4.58, y0 + 0.42))
+    # add_small_ghost_image(ax, (x0 + 4.58, y0 + 0.42))
     add_panel_footer(ax, x0, y0 + 0.22, w, "Random speckle patterns replace entanglement")
 
 
@@ -520,7 +520,7 @@ def draw_computational_panel(ax, x0, y0, w, h):
     projector = (x0 + 0.70, y0 + 2.05)
     slit = (x0 + 2.05, y0 + 2.05)
     bucket = (x0 + 3.40, y0 + 2.05)
-    laptop = (x0 + 4.65, y0 + 2.00)
+    laptop = (x0 + 3.40, y0 + 0.85)
 
     add_projector(ax, projector)
     ax.text(projector[0], projector[1] + 0.43, "projector", ha="center", fontsize=FONT_SMALL)
@@ -545,11 +545,11 @@ def draw_computational_panel(ax, x0, y0, w, h):
     ax.text(laptop[0], laptop[1] - 0.50, "computer", ha="center", fontsize=FONT_SMALL)
 
     # Connections
-    add_arrow(ax, (bucket[0] + 0.24, bucket[1]), (laptop[0] - 0.45, laptop[1] + 0.02), color="0.25", lw=1.4)
-    ax.text(x0 + 3.95, y0 + 2.56, "known patterns", fontsize=FONT_SMALL, color=COLOR_COMP, ha="center")
-    add_arrow(ax, (projector[0] + 0.05, projector[1] - 0.30), (laptop[0] - 0.15, laptop[1] - 0.05), color=COLOR_COMP, lw=1.2)
+    add_arrow(ax, (bucket[0], bucket[1]-0.3), (laptop[0], laptop[1] + 0.3), color="0.25", lw=1.4)
+    #ax.text(x0 + 3.95, y0 + 2.56, "known patterns", fontsize=FONT_SMALL, color=COLOR_COMP, ha="center")
+    # add_arrow(ax, (projector[0] + 0.05, projector[1] - 0.30), (laptop[0], laptop[1]), color=COLOR_COMP, lw=1.2)
 
-    add_small_ghost_image(ax, (x0 + 4.50, y0 + 0.42))
+    #add_small_ghost_image(ax, (x0 + 4.50, y0 + 0.42))
     add_panel_footer(ax, x0, y0 + 0.22, w, "The second optical arm becomes a calculation")
 
 
@@ -594,8 +594,8 @@ def make_figure():
     draw_computational_panel(ax, 0.35 + 2 * (w + gap), y0, w, h)
 
     # progression arrows between panels
-    add_arrow(ax, (4.97, 2.73), (5.28, 2.73), color="0.50", lw=1.6, mutation_scale=13)
-    add_arrow(ax, (9.75, 2.73), (10.06, 2.73), color="0.50", lw=1.6, mutation_scale=13)
+    #add_arrow(ax, (4.97, 2.73), (5.28, 2.73), color="0.50", lw=1.6, mutation_scale=13)
+    #add_arrow(ax, (9.75, 2.73), (10.06, 2.73), color="0.50", lw=1.6, mutation_scale=13)
 
     fig.tight_layout(pad=0.2)
     return fig
