@@ -6,7 +6,7 @@ Figure 3. Making the ghost classical.
 Three stages of ghost imaging:
     Left: entangled photon pairs and two detectors.
     Centre: classically correlated speckle beams and two detectors.
-    Right: computational ghost imaging — a projector, one bucket detector,
+    Right: computational ghost imaging — a projector, one fixed detector,
            and a computer.
 
 The script produces a clean three-panel scientific diagram using matplotlib only.
@@ -190,7 +190,7 @@ def add_double_slit(ax, center, width=0.28, height=0.78, slit_width=0.045, gap=0
         )
 
 
-def add_bucket_detector(ax, center, scale=1.0):
+def add_fixed_detector(ax, center, scale=1.0):
     x, y = center
     w, h = 0.42 * scale, 0.44 * scale
     ax.add_patch(
@@ -406,7 +406,7 @@ def draw_quantum_panel(ax, x0, y0, w, h):
 
     crystal = (x0 + 0.7, y0 + 2.20)
     slit = (x0 + 2.6, y0 + 2.55)
-    bucket = (x0 + 3.6, y0 + 2.55)
+    fixed = (x0 + 3.6, y0 + 2.55)
     camera = (x0 + 3.6, y0 + 1.55)
 
     # Pump + crystal
@@ -417,15 +417,15 @@ def draw_quantum_panel(ax, x0, y0, w, h):
     ax.text(crystal[0], crystal[1] + 0.58, "SPDC", ha="center", fontsize=FONT_SMALL)
 
     # Two arms
-    add_beam(ax, crystal, (bucket[0] - 0.05, bucket[1]), COLOR_A)
+    add_beam(ax, crystal, (fixed[0] - 0.05, fixed[1]), COLOR_A)
     add_beam(ax, crystal, (camera[0] - 0.05, camera[1]), COLOR_B)
 
     add_double_slit(ax, slit)
     ax.text(slit[0], slit[1] + 0.55, "double slit", ha="center", fontsize=FONT_SMALL)
-    add_bucket_detector(ax, bucket)
+    add_fixed_detector(ax, fixed)
     add_camera(ax, camera)
 
-    ax.text(bucket[0], bucket[1] + 0.45, "bucket", ha="center", fontsize=FONT_SMALL)
+    ax.text(fixed[0], fixed[1] + 0.45, "fixed,\nnon-imaging", ha="center", fontsize=FONT_SMALL)
     ax.text(camera[0], camera[1] - 0.48, "camera", ha="center", fontsize=FONT_SMALL)
 
     # # Coincidence box
@@ -447,7 +447,7 @@ def draw_quantum_panel(ax, x0, y0, w, h):
     # ax.text(corr_x, corr_y - 0.10, "correlation", ha="center", va="center",
     #         fontsize=FONT_SMALL, color=COLOR_Q)
 
-    #add_arrow(ax, (bucket[0] + 0.26, bucket[1]), (corr_x - 0.58, corr_y + 0.10), color="0.25", lw=1.4)
+    #add_arrow(ax, (fixed[0] + 0.26, fixed[1]), (corr_x - 0.58, corr_y + 0.10), color="0.25", lw=1.4)
     #add_arrow(ax, (camera[0] + 0.30, camera[1]), (corr_x - 0.58, corr_y - 0.10), color="0.25", lw=1.4)
 
     # add_small_ghost_image(ax, (x0 + 4.55, y0 + 0.42))
@@ -461,7 +461,7 @@ def draw_classical_panel(ax, x0, y0, w, h):
     diffuser = (x0 + 0.7, y0 + 2.20)
     bs = (x0 + 2.10, y0 + 2.10)
     slit = (x0 + 2.6, y0 + 2.55)
-    bucket = (x0 + 3.6, y0 + 2.55)
+    fixed = (x0 + 3.6, y0 + 2.55)
     camera = (x0 + 3.6, y0 + 1.55)
 
     # # Laser
@@ -481,14 +481,14 @@ def draw_classical_panel(ax, x0, y0, w, h):
     #ax.text(bs[0], bs[1] - 0.50, "beam splitter", ha="center", fontsize=FONT_SMALL)
 
     # Split beams
-    add_beam(ax, (diffuser[0] + 0.17, diffuser[1]), (bucket[0] - 0.05, bucket[1]), COLOR_A)
+    add_beam(ax, (diffuser[0] + 0.17, diffuser[1]), (fixed[0] - 0.05, fixed[1]), COLOR_A)
     add_beam(ax, (diffuser[0] + 0.17, diffuser[1]), (camera[0] - 0.05, camera[1]), COLOR_B)
 
     add_double_slit(ax, slit)
     ax.text(slit[0], slit[1] + 0.55, "double slit", ha="center", fontsize=FONT_SMALL)
-    add_bucket_detector(ax, bucket)
+    add_fixed_detector(ax, fixed)
     add_camera(ax, camera)
-    ax.text(bucket[0], bucket[1] + 0.45, "bucket", ha="center", fontsize=FONT_SMALL)
+    ax.text(fixed[0], fixed[1] + 0.45, "fixed,\nnon-imaging", ha="center", fontsize=FONT_SMALL)
     ax.text(camera[0], camera[1] - 0.48, "camera", ha="center", fontsize=FONT_SMALL)
 
     # # correlation / computer block
@@ -507,7 +507,7 @@ def draw_classical_panel(ax, x0, y0, w, h):
     # )
     # ax.text(corr_x, corr_y + 0.02, "correlate", ha="center", va="center",
     #         fontsize=FONT_SMALL, weight="bold", color=COLOR_CLASSICAL)
-    # add_arrow(ax, (bucket[0] + 0.26, bucket[1]), (corr_x - 0.54, corr_y + 0.10), color="0.25", lw=1.4)
+    # add_arrow(ax, (fixed[0] + 0.26, fixed[1]), (corr_x - 0.54, corr_y + 0.10), color="0.25", lw=1.4)
     # add_arrow(ax, (camera[0] + 0.30, camera[1]), (corr_x - 0.54, corr_y - 0.10), color="0.25", lw=1.4)
 
     # add_small_ghost_image(ax, (x0 + 4.58, y0 + 0.42))
@@ -519,7 +519,7 @@ def draw_computational_panel(ax, x0, y0, w, h):
 
     projector = (x0 + 0.70, y0 + 2.05)
     slit = (x0 + 2.05, y0 + 2.05)
-    bucket = (x0 + 3.40, y0 + 2.05)
+    fixed = (x0 + 3.40, y0 + 2.05)
     laptop = (x0 + 3.40, y0 + 0.85)
 
     add_projector(ax, projector)
@@ -536,16 +536,16 @@ def draw_computational_panel(ax, x0, y0, w, h):
     add_double_slit(ax, slit)
     ax.text(slit[0], slit[1] + 0.55, "double slit", ha="center", fontsize=FONT_SMALL)
 
-    add_beam(ax, (slit[0] + 0.15, slit[1]), (bucket[0] - 0.25, bucket[1]), COLOR_A, lw=2.2)
-    add_bucket_detector(ax, bucket)
-    ax.text(bucket[0], bucket[1] + 0.45, "bucket", ha="center", fontsize=FONT_SMALL)
+    add_beam(ax, (slit[0] + 0.15, slit[1]), (fixed[0] - 0.25, fixed[1]), COLOR_A, lw=2.2)
+    add_fixed_detector(ax, fixed)
+    ax.text(fixed[0], fixed[1] + 0.45, "fixed,\nnon-imaging", ha="center", fontsize=FONT_SMALL)
 
     # Laptop / computer
     add_laptop(ax, laptop)
     ax.text(laptop[0], laptop[1] - 0.50, "computer", ha="center", fontsize=FONT_SMALL)
 
     # Connections
-    add_arrow(ax, (bucket[0], bucket[1]-0.3), (laptop[0], laptop[1] + 0.3), color="0.25", lw=1.4)
+    add_arrow(ax, (fixed[0], fixed[1]-0.3), (laptop[0], laptop[1] + 0.3), color="0.25", lw=1.4)
     #ax.text(x0 + 3.95, y0 + 2.56, "known patterns", fontsize=FONT_SMALL, color=COLOR_COMP, ha="center")
     # add_arrow(ax, (projector[0] + 0.05, projector[1] - 0.30), (laptop[0], laptop[1]), color=COLOR_COMP, lw=1.2)
 

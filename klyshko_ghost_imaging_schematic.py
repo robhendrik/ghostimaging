@@ -5,15 +5,15 @@ Klyshko advanced-wave picture for a ghost double-slit experiment.
 Top:
     SPDC ghost-imaging setup.
     UV laser -> SPDC crystal.
-    Photon A -> double slit -> bucket detector.
+    Photon A -> double slit -> fixed detector.
     Photon B -> camera.
-    Bucket and camera feed a coincidence-correlation unit.
+    fixed and camera feed a coincidence-correlation unit.
 
 Bottom:
     Klyshko equivalent.
-    The bucket detector is replaced by a classical light source.
+    The fixed detector is replaced by a classical light source.
     The SPDC crystal is replaced by a mirror.
-    Light propagates from the former bucket position, through the double slit,
+    Light propagates from the former fixed position, through the double slit,
     to the mirror, then onward to the camera.
 
 The lower panel deliberately contains:
@@ -87,7 +87,7 @@ def add_double_slit(ax, center, width=0.42, height=0.98,
                                facecolor="white", edgecolor="white", zorder=8))
 
 
-def add_bucket_detector(ax, center, scale=1.0):
+def add_fixed_detector(ax, center, scale=1.0):
     x, y = center
     w, h = 0.52*scale, 0.55*scale
     ax.add_patch(FancyBboxPatch((x-w/2, y-h/2), w, h,
@@ -166,7 +166,7 @@ def draw_quantum_panel(ax):
     y_source = 6.45
     crystal = (3.10, y_source)
     slit = (8.10, 6.95)
-    bucket = (10.58, 6.95)
+    fixed = (10.58, 6.95)
     camera = (10.62, 5.55)
     corr = (12.28, 6.25)
 
@@ -186,20 +186,20 @@ def draw_quantum_panel(ax):
 
     add_beam(ax, crystal, (10.15, 6.95), COLOR_A)
     add_double_slit(ax, slit)
-    add_bucket_detector(ax, bucket)
+    add_fixed_detector(ax, fixed)
     ax.text(4.45, 7.25, "Photon A", color=COLOR_A,
             fontsize=FONT_LABEL, weight="bold")
     ax.text(slit[0], slit[1]+0.63, "double slit",
             ha="center", fontsize=FONT_LABEL)
-    ax.text(bucket[0], bucket[1]-0.72,
-            "bucket detector\n(no spatial resolution)",
+    ax.text(fixed[0], fixed[1]-0.42,
+            "fixed detector\n(no spatial resolution)",
             ha="center", va="top", fontsize=FONT_SMALL+1)
 
     add_beam(ax, crystal, (10.08, 5.58), COLOR_B)
     add_camera(ax, camera)
     ax.text(4.28, 5.68, "Photon B", color=COLOR_B,
             fontsize=FONT_LABEL, weight="bold")
-    ax.text(camera[0], camera[1]-0.58,
+    ax.text(camera[0], camera[1]-0.38,
             "camera\n(position-sensitive)",
             ha="center", va="top", fontsize=FONT_SMALL+1)
 
@@ -218,7 +218,7 @@ def draw_klyshko_panel(ax):
             fontsize=FONT_PANEL, weight="bold", color="0.15")
 
     add_simple_laser(ax, source, direction="left", scale=1.05)
-    ax.text(source[0], source[1]+0.46, "light source",
+    ax.text(source[0], source[1]+0.26, "light source",
             ha="center", fontsize=FONT_LABEL)
 
     add_double_slit(ax, slit)
@@ -230,10 +230,10 @@ def draw_klyshko_panel(ax):
             ha="center", fontsize=FONT_LABEL)
 
     add_camera(ax, camera)
-    ax.text(camera[0], camera[1]-0.58, "camera",
+    ax.text(camera[0], camera[1]-0.38, "camera",
             ha="center", va="top", fontsize=FONT_SMALL+1)
 
-    # Advanced-wave path: former bucket position -> double slit -> mirror -> camera
+    # Advanced-wave path: former fixed position -> double slit -> mirror -> camera
     add_beam(ax, (10.25, 3.10), mirror, COLOR_K, lw=2.6)
     add_beam(ax, mirror, (10.08, 1.93), COLOR_K, lw=2.6)
 

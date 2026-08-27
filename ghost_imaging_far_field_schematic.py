@@ -3,9 +3,9 @@
 
 Creates a clean, D'Angelo-inspired layout using matplotlib only:
 - UV laser pumps an SPDC crystal.
-- Photon A passes through a double slit and is collected by a bucket detector.
+- Photon A passes through a double slit and is collected by a fixed detector.
 - Photon B propagates in the far-field arm directly to a camera.
-- Bucket and camera signals feed a coincidence/correlation block.
+- fixed and camera signals feed a coincidence/correlation block.
 - Lower panels show that neither arm alone contains the final ghost pattern,
   while the coincidence correlation reveals an interference pattern.
 
@@ -82,7 +82,7 @@ def add_double_slit(ax, center, width=0.42, height=1.0, slit_width=0.07, gap=0.0
                                facecolor="white", edgecolor="white", zorder=8))
 
 
-def add_bucket_detector(ax, center, scale=1.0):
+def add_fixed_detector(ax, center, scale=1.0):
     x, y = center
     w, h = 0.52*scale, 0.55*scale
     ax.add_patch(FancyBboxPatch((x-w/2, y-h/2), w, h,
@@ -138,7 +138,7 @@ def add_plot_panel(ax, xywh, title, bordercolor, mode):
     ax.plot([px0, px1], [py0, py0], color="0.15", lw=1.0, zorder=3)
     ax.plot([px0, px0], [py0, py1], color="0.15", lw=1.0, zorder=3)
 
-    if mode == "bucket":
+    if mode == "fixed":
         rng = np.random.default_rng(11)
         t = np.linspace(0.04, 0.98, 40)
         clicks = rng.integers(0, 2, size=t.size)
@@ -195,19 +195,19 @@ def make_figure():
     add_spdc_crystal(ax, crystal)
     ax.text(crystal[0], crystal[1]+0.70, "SPDC crystal", ha="center", fontsize=FONT_LABEL)
 
-    # Photon A: double-slit -> bucket detector
+    # Photon A: double-slit -> fixed detector
     a_lens_1 = (4.75, 6.25)
     slit = (8.16, 6.45)
     a_lens_2 = (8.15, 6.65)
-    bucket = (10.6, 6.65)
+    fixed = (10.6, 6.65)
     add_beam(ax, crystal, (10.15, 6.65), COLOR_A)
     add_lens(ax, a_lens_1)
     add_double_slit(ax, slit)
     add_lens(ax, a_lens_2, height=0.82)
-    add_bucket_detector(ax, bucket)
+    add_fixed_detector(ax, fixed)
     ax.text(4.45, 6.43, "Photon A", color=COLOR_A, fontsize=FONT_LABEL, weight="bold")
     ax.text(slit[0], slit[1]+0.70, "double slit", ha="center", fontsize=FONT_LABEL)
-    ax.text(bucket[0]+0.08, bucket[1]-0.72, "bucket detector\n(no spatial resolution)",
+    ax.text(fixed[0]+0.08, fixed[1]-0.72, "fixed detector\n(no spatial resolution)",
             ha="center", va="top", fontsize=FONT_SMALL+1)
 
     # Photon B: far-field arm only, directly to camera
@@ -228,7 +228,7 @@ def make_figure():
     add_curved_wire(ax, (11.02, 4.82), (11.52, 5.47))
 
     # Lower explanatory panels
-    add_plot_panel(ax, (0.55, 0.55, 3.95, 1.85), "Bucket detector", COLOR_A, "bucket")
+    add_plot_panel(ax, (0.55, 0.55, 3.95, 1.85), "fixed detector", COLOR_A, "fixed")
     add_plot_panel(ax, (5.05, 0.55, 3.95, 1.85), "Camera", COLOR_B, "camera")
     add_plot_panel(ax, (9.55, 0.55, 3.95, 1.85), "Coincidences", COLOR_PUMP, "coincidence")
 
