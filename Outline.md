@@ -1,6 +1,6 @@
 # Who Needs a Double Slit Anyway?
 
-**The double-slit experiment is the most famous demonstration in quantum physics. What happens when we remove the slits and add entanglement instead?**
+**The double-slit experiment is the most famous demonstration in quantum physics. What happens when the photon making the fringes never passes through either slit?**
 
 ---
 
@@ -29,15 +29,17 @@ MEDIUM OPTIMISATION NOTES:
 
 
 
-Every popular account of quantum mechanics eventually reaches the same climax. Send photons one at a time toward a pair of slits. Each photon arrives as a single dot on a screen. But after thousands of them, an interference pattern builds up — bright and dark bands that seem to require each photon to have somehow explored both paths.
-
-As a physics student, I learned the double slit from textbooks, where the logic is wonderfully clean. A laboratory is less tidy.
+Every popular account of quantum mechanics eventually reaches the same climax. Send photons one at a time toward a pair of slits. Each photon arrives as a single dot on a screen. But after thousands of them, an interference pattern builds up — bright and dark bands that seem to require each photon to have somehow explored both paths. 
 
 Now imagine removing the slits from the path of the photon that makes the pattern.
 
 ---
 ## The photon that was never there
-In 1995, physicists demonstrated something that looked almost impossible. Entangled photon pairs could produce an image in a detector whose photons had never interacted with the object at all [1]. That same year, a separate team pushed the idea into more familiar territory: they replaced the object with a double slit [2].
+In 1995, physicists demonstrated something that looked almost impossible. Entangled photon pairs could produce an image in a detector whose photons had never interacted with the object at all [1]. 
+
+The effect was named ‘ghost imaging’, based on the strange division of labour. The light that touches the object is detected without forming an image, while the detector that does form the image receives light that never touched the object. The image exists only in the correlations between the two detection records.
+
+That same year, a separate team pushed the idea into more familiar territory: they replaced the object with a double slit [2].
 
 One photon passed through the slits and was collected by a detector with no spatial resolution — a fixed detector that merely registered whether a photon arrived without making an image. Its entangled partner travelled along a separate path to a position-sensitive detector.
 
@@ -47,9 +49,8 @@ But when the two detection records were compared, and only coincident events wer
 
 The photon whose position built up the interference pattern had never gone through either slit.
 
-> **The photon that creates the interference pattern never passed through the slits. Its entangled partner did — and was detected by a device that recorded no image at all..**
+> **The photon that creates the interference pattern never passed through the slits. Its entangled partner did — and was detected by a device that recorded no image at all.**
 
-<!-- FIGURE 1 -->
 ![ghost_imaging_far_field_schematic.png](ghost_imaging_far_field_schematic.png)
 **Figure 1. The ghost double-slit experiment. One photon passes through a double slit and reaches a fixed detector with no spatial resolution. Its entangled partner travels directly to a position-sensitive detector. Neither detector reveals an interference pattern by itself. The fringes appear only when the two detection records are correlated.**
 
@@ -105,7 +106,7 @@ If a classical optical picture predicts the ghost so well, how much of the effec
 
 ## Then the entanglement became optional
 
-The next surprise was bigger: entanglement was not actually required to make a ghost image.
+It turns out that the ghost image itself does not require entanglement.
 
 Take a laser and pass it through a rotating ground-glass screen. The result is a constantly changing speckle pattern. Split that pattern into two copies with a beam splitter. Send one copy through the object to a fixed detector, and record the other with a camera.
 
@@ -115,7 +116,7 @@ But correlate the signal with the recorded speckle patterns, and the image appea
 
 No entangled photons are involved.
 
-Then researchers removed even more of the apparatus. If the illumination patterns are generated deliberately with a spatial light modulator, the computer already knows exactly what was projected. The second beam no longer has to be measured at all [8,9].
+Classical correlations can reproduce both ghost images and ghost interference. Then researchers removed even more of the apparatus. If the illumination patterns are generated deliberately with a spatial light modulator, the second beam no longer has to be measured at all [8,9].
 
 Now the setup has collapsed to its essentials: a structured light source, the object, a single-pixel detector and a computer.
 
