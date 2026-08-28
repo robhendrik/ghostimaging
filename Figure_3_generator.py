@@ -1,54 +1,52 @@
 #!/usr/bin/env python3
-"""
-Three-stage ghost-imaging figure for a blog post.
+"""Three-stage ghost-imaging figure for a blog post.
 
 Figure 3. Making the ghost classical.
-Three stages of ghost imaging:
+
+Panels:
     Left: entangled photon pairs and two detectors.
     Centre: classically correlated speckle beams and two detectors.
-    Right: computational ghost imaging — a projector, one fixed detector,
+    Right: computational ghost imaging with a projector, one fixed detector,
            and a computer.
-
-The script produces a clean three-panel scientific diagram using matplotlib only.
 
 Outputs:
     ghost_imaging_three_stages.png
     ghost_imaging_three_stages.pdf
-
-Usage:
-    python ghost_imaging_three_stages.py
 """
 
 from __future__ import annotations
 
 from pathlib import Path
-import numpy as np
+
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.patches import (
-    Rectangle,
-    FancyBboxPatch,
-    Ellipse,
     Circle,
+    Ellipse,
     FancyArrowPatch,
+    FancyBboxPatch,
     Polygon,
+    Rectangle,
 )
 
 
-# ---------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------
+# =============================================================================
+# SETTINGS
+# =============================================================================
 
 FIGSIZE = (15, 5.9)
 DPI = 220
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-OUT_PNG = SCRIPT_DIR / "ghost_imaging_three_stages.png"
-OUT_PDF = SCRIPT_DIR / "ghost_imaging_three_stages.pdf"
+OUT_PNG = SCRIPT_DIR / "Figure_3.png"
+OUT_PDF = SCRIPT_DIR / "Figure_3.pdf"
 
-FONT_SMALL = 9.5
-FONT_LABEL = 11.5
-FONT_PANEL = 13.5
-FONT_TITLE = 14.5
+# Set to e.g. 1.10 to increase all text by 10%.
+FONT_SCALE = 1.350
+FONT_SMALL = 9.5 * FONT_SCALE
+FONT_LABEL = 11.5 * FONT_SCALE
+FONT_PANEL = 13.5 * FONT_SCALE
+FONT_TITLE = 14.5 * FONT_SCALE
 
 COLOR_Q = "tab:purple"
 COLOR_A = "tab:red"
@@ -56,16 +54,14 @@ COLOR_B = "tab:blue"
 COLOR_CLASSICAL = "tab:green"
 COLOR_COMP = "tab:orange"
 COLOR_LINE = "0.18"
-COLOR_LIGHT = "0.80"
 COLOR_PANEL_BG = "0.985"
 
 LW_BEAM = 2.3
-LW_EDGE = 1.2
 
 
-# ---------------------------------------------------------------------
-# Basic drawing helpers
-# ---------------------------------------------------------------------
+# =============================================================================
+# BASIC DRAWING HELPERS
+# =============================================================================
 
 def add_arrow(ax, start, end, color=COLOR_LINE, lw=1.8, mutation_scale=13, zorder=4):
     ax.add_patch(
@@ -156,14 +152,21 @@ def add_ground_glass(ax, center, width=0.30, height=0.72):
             zorder=6,
         )
     )
-    # speckly texture
+
     rng = np.random.default_rng(1234)
     xs = rng.uniform(x - width / 2 + 0.02, x + width / 2 - 0.02, 45)
     ys = rng.uniform(y - height / 2 + 0.02, y + height / 2 - 0.02, 45)
     ax.scatter(xs, ys, s=4, color=COLOR_CLASSICAL, alpha=0.7, zorder=7)
 
 
-def add_double_slit(ax, center, width=0.28, height=0.78, slit_width=0.045, gap=0.045):
+def add_double_slit(
+    ax,
+    center,
+    width=0.28,
+    height=0.78,
+    slit_width=0.045,
+    gap=0.045,
+):
     x, y = center
     ax.add_patch(
         Rectangle(
@@ -175,12 +178,13 @@ def add_double_slit(ax, center, width=0.28, height=0.78, slit_width=0.045, gap=0
             zorder=7,
         )
     )
+
     slit_h = height * 0.72
     slit_y = y - slit_h / 2
-    for sx in (x - gap / 2 - slit_width, x + gap / 2):
+    for slit_x in (x - gap / 2 - slit_width, x + gap / 2):
         ax.add_patch(
             Rectangle(
-                (sx, slit_y),
+                (slit_x, slit_y),
                 slit_width,
                 slit_h,
                 facecolor="white",
@@ -193,6 +197,7 @@ def add_double_slit(ax, center, width=0.28, height=0.78, slit_width=0.045, gap=0
 def add_fixed_detector(ax, center, scale=1.0):
     x, y = center
     w, h = 0.42 * scale, 0.44 * scale
+
     ax.add_patch(
         FancyBboxPatch(
             (x - w / 2, y - h / 2),
@@ -221,6 +226,7 @@ def add_fixed_detector(ax, center, scale=1.0):
 def add_camera(ax, center, scale=1.0):
     x, y = center
     body_w, body_h = 0.58 * scale, 0.40 * scale
+
     ax.add_patch(
         FancyBboxPatch(
             (x - body_w / 2, y - body_h / 2),
@@ -260,6 +266,7 @@ def add_camera(ax, center, scale=1.0):
 def add_laptop(ax, center, scale=1.0):
     x, y = center
     screen_w, screen_h = 0.58 * scale, 0.40 * scale
+
     ax.add_patch(
         Rectangle(
             (x - screen_w / 2, y - screen_h / 2 + 0.05 * scale),
@@ -282,6 +289,7 @@ def add_laptop(ax, center, scale=1.0):
             zorder=7,
         )
     )
+
     base = Polygon(
         [
             (x - 0.38 * scale, y - 0.18 * scale),
@@ -301,6 +309,7 @@ def add_laptop(ax, center, scale=1.0):
 def add_projector(ax, center, scale=1.0):
     x, y = center
     w, h = 0.56 * scale, 0.30 * scale
+
     ax.add_patch(
         FancyBboxPatch(
             (x - w / 2, y - h / 2),
@@ -325,64 +334,6 @@ def add_projector(ax, center, scale=1.0):
     )
 
 
-def add_beam_splitter(ax, center, size=0.24):
-    x, y = center
-    ax.add_patch(
-        Rectangle(
-            (x - size / 2, y - size / 2),
-            size,
-            size,
-            angle=45,
-            facecolor="0.90",
-            edgecolor="0.40",
-            linewidth=1.1,
-            zorder=6,
-        )
-    )
-
-
-def add_small_ghost_image(ax, xy, size=(0.66, 0.52), label="ghost image"):
-    x, y = xy
-    w, h = size
-    ax.add_patch(
-        FancyBboxPatch(
-            (x, y),
-            w,
-            h,
-            boxstyle="round,pad=0.02,rounding_size=0.04",
-            facecolor="0.95",
-            edgecolor="0.60",
-            linewidth=0.9,
-            zorder=2,
-        )
-    )
-    # stylized double-slit-like fringe image
-    xs = np.linspace(-1, 1, 160)
-    ys = np.linspace(-1, 1, 120)
-    X, Y = np.meshgrid(xs, ys)
-    pattern = np.exp(-(X**2 + Y**2) * 1.8) * (0.5 + 0.5 * np.cos(11 * X)) * (0.3 + 0.7 * np.exp(-Y**2 * 5))
-    ax.imshow(
-        pattern,
-        extent=(x + 0.05, x + w - 0.05, y + 0.07, y + h - 0.07),
-        cmap="Blues",
-        interpolation="bilinear",
-        origin="lower",
-        zorder=3,
-        alpha=0.95,
-        aspect="auto",
-    )
-    ax.text(
-        x + w / 2,
-        y - 0.08,
-        label,
-        ha="center",
-        va="top",
-        fontsize=FONT_SMALL,
-        color="0.25",
-        zorder=10,
-    )
-
-
 def add_panel_footer(ax, x, y, w, text):
     ax.text(
         x + w / 2,
@@ -397,165 +348,205 @@ def add_panel_footer(ax, x, y, w, text):
     )
 
 
-# ---------------------------------------------------------------------
-# Panel content
-# ---------------------------------------------------------------------
+# =============================================================================
+# PANEL CONTENT
+# =============================================================================
 
 def draw_quantum_panel(ax, x0, y0, w, h):
     add_panel_box(ax, x0, y0, w, h, "Entangled photons")
 
     crystal = (x0 + 0.7, y0 + 2.20)
-    slit = (x0 + 2.6, y0 + 2.55)
+    slit = (x0 + 2.3, y0 + 2.45)
     fixed = (x0 + 3.6, y0 + 2.55)
     camera = (x0 + 3.6, y0 + 1.55)
 
-    # Pump + crystal
-    #add_arrow(ax, (x0 + 0.20, y0 + 2.20), (x0 + 0.72, y0 + 2.20), color=COLOR_Q, lw=2.6)
-    #add_beam(ax, (x0 + 0.72, y0 + 2.20), (x0 + 0.95, y0 + 2.20), COLOR_Q, lw=2.6, alpha=0.55)
-    #ax.text(x0 + 0.22, y0 + 2.46, "UV", color=COLOR_Q, fontsize=FONT_SMALL + 0.5, ha="left")
     add_spdc_crystal(ax, crystal)
-    ax.text(crystal[0], crystal[1] + 0.58, "SPDC", ha="center", fontsize=FONT_SMALL)
+    ax.text(
+        crystal[0],
+        crystal[1] + 0.58,
+        "SPDC",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
 
-    # Two arms
     add_beam(ax, crystal, (fixed[0] - 0.05, fixed[1]), COLOR_A)
     add_beam(ax, crystal, (camera[0] - 0.05, camera[1]), COLOR_B)
 
     add_double_slit(ax, slit)
-    ax.text(slit[0], slit[1] + 0.55, "double slit", ha="center", fontsize=FONT_SMALL)
+    ax.text(
+        slit[0],
+        slit[1] + 0.55,
+        "double slit",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
+
     add_fixed_detector(ax, fixed)
     add_camera(ax, camera)
 
-    ax.text(fixed[0], fixed[1] + 0.45, "fixed,\nnon-imaging", ha="center", fontsize=FONT_SMALL)
-    ax.text(camera[0], camera[1] - 0.48, "camera", ha="center", fontsize=FONT_SMALL)
+    ax.text(
+        fixed[0],
+        fixed[1] + 0.45,
+        "fixed,\nnon-imaging",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
+    ax.text(
+        camera[0],
+        camera[1] - 0.48,
+        "camera",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
 
-    # # Coincidence box
-    # corr_x, corr_y = x0 + 4.95, y0 + 2.05
-    # ax.add_patch(
-    #     FancyBboxPatch(
-    #         (corr_x - 0.55, corr_y - 0.23),
-    #         1.10,
-    #         0.46,
-    #         boxstyle="round,pad=0.02,rounding_size=0.05",
-    #         facecolor="0.98",
-    #         edgecolor=COLOR_Q,
-    #         linewidth=1.2,
-    #         zorder=5,
-    #     )
-    # )
-    # ax.text(corr_x, corr_y + 0.04, "coincidence", ha="center", va="center",
-    #         fontsize=FONT_SMALL, weight="bold", color=COLOR_Q)
-    # ax.text(corr_x, corr_y - 0.10, "correlation", ha="center", va="center",
-    #         fontsize=FONT_SMALL, color=COLOR_Q)
-
-    #add_arrow(ax, (fixed[0] + 0.26, fixed[1]), (corr_x - 0.58, corr_y + 0.10), color="0.25", lw=1.4)
-    #add_arrow(ax, (camera[0] + 0.30, camera[1]), (corr_x - 0.58, corr_y - 0.10), color="0.25", lw=1.4)
-
-    # add_small_ghost_image(ax, (x0 + 4.55, y0 + 0.42))
-    add_panel_footer(ax, x0, y0 + 0.22, w, "Two photons, two detectors, one image in their correlations")
+    add_panel_footer(
+        ax,
+        x0,
+        y0 + 0.52,
+        w,
+        "Two photons, two detectors,\none image in their correlations",
+    )
 
 
 def draw_classical_panel(ax, x0, y0, w, h):
     add_panel_box(ax, x0, y0, w, h, "Classical speckle")
 
-    laser = (x0 + 0.48, y0 + 2.20)
     diffuser = (x0 + 0.7, y0 + 2.20)
-    bs = (x0 + 2.10, y0 + 2.10)
-    slit = (x0 + 2.6, y0 + 2.55)
+    slit = (x0 + 2.3, y0 + 2.45)
     fixed = (x0 + 3.6, y0 + 2.55)
     camera = (x0 + 3.6, y0 + 1.55)
 
-    # # Laser
-    # add_arrow(ax, (laser[0] - 0.28, laser[1]), (laser[0] + 0.10, laser[1]), color=COLOR_CLASSICAL, lw=2.6)
-    # ax.text(laser[0] - 0.32, laser[1] + 0.26, "laser", fontsize=FONT_SMALL, color=COLOR_CLASSICAL, ha="left")
-
-    # Rotating diffuser / ground glass
     add_ground_glass(ax, diffuser)
-    ax.text(diffuser[0], diffuser[1] + 0.60, "speckle pattern", ha="center", fontsize=FONT_SMALL)
+    ax.text(
+        diffuser[0],
+        diffuser[1] + 0.60,
+        "speckle pattern",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
 
-    # Beam to beam splitter
-    # add_beam(ax, (laser[0] + 0.10, laser[1]), (diffuser[0] - 0.17, diffuser[1]), COLOR_CLASSICAL, lw=2.4, alpha=0.6)
-    # add_beam(ax, (diffuser[0] + 0.17, diffuser[1]), (bs[0] - 0.05, bs[1]), COLOR_CLASSICAL, lw=2.4, alpha=0.75)
-
-    # Beam splitter
-    #add_beam_splitter(ax, bs)
-    #ax.text(bs[0], bs[1] - 0.50, "beam splitter", ha="center", fontsize=FONT_SMALL)
-
-    # Split beams
     add_beam(ax, (diffuser[0] + 0.17, diffuser[1]), (fixed[0] - 0.05, fixed[1]), COLOR_A)
     add_beam(ax, (diffuser[0] + 0.17, diffuser[1]), (camera[0] - 0.05, camera[1]), COLOR_B)
 
     add_double_slit(ax, slit)
-    ax.text(slit[0], slit[1] + 0.55, "double slit", ha="center", fontsize=FONT_SMALL)
+    ax.text(
+        slit[0],
+        slit[1] + 0.55,
+        "double slit",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
+
     add_fixed_detector(ax, fixed)
     add_camera(ax, camera)
-    ax.text(fixed[0], fixed[1] + 0.45, "fixed,\nnon-imaging", ha="center", fontsize=FONT_SMALL)
-    ax.text(camera[0], camera[1] - 0.48, "camera", ha="center", fontsize=FONT_SMALL)
 
-    # # correlation / computer block
-    # corr_x, corr_y = x0 + 5.00, y0 + 2.05
-    # ax.add_patch(
-    #     FancyBboxPatch(
-    #         (corr_x - 0.52, corr_y - 0.23),
-    #         1.04,
-    #         0.46,
-    #         boxstyle="round,pad=0.02,rounding_size=0.05",
-    #         facecolor="0.98",
-    #         edgecolor=COLOR_CLASSICAL,
-    #         linewidth=1.2,
-    #         zorder=5,
-    #     )
-    # )
-    # ax.text(corr_x, corr_y + 0.02, "correlate", ha="center", va="center",
-    #         fontsize=FONT_SMALL, weight="bold", color=COLOR_CLASSICAL)
-    # add_arrow(ax, (fixed[0] + 0.26, fixed[1]), (corr_x - 0.54, corr_y + 0.10), color="0.25", lw=1.4)
-    # add_arrow(ax, (camera[0] + 0.30, camera[1]), (corr_x - 0.54, corr_y - 0.10), color="0.25", lw=1.4)
+    ax.text(
+        fixed[0],
+        fixed[1] + 0.45,
+        "fixed,\nnon-imaging",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
+    ax.text(
+        camera[0],
+        camera[1] - 0.48,
+        "camera",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
 
-    # add_small_ghost_image(ax, (x0 + 4.58, y0 + 0.42))
-    add_panel_footer(ax, x0, y0 + 0.22, w, "Random speckle patterns replace entanglement")
+    add_panel_footer(
+        ax,
+        x0,
+        y0 + 0.52,
+        w,
+        "Random speckle patterns replace\nentanglement",
+    )
 
 
 def draw_computational_panel(ax, x0, y0, w, h):
     add_panel_box(ax, x0, y0, w, h, "Computational")
 
-    projector = (x0 + 0.70, y0 + 2.05)
-    slit = (x0 + 2.05, y0 + 2.05)
-    fixed = (x0 + 3.40, y0 + 2.05)
-    laptop = (x0 + 3.40, y0 + 0.85)
+    projector = (x0 + 0.70, y0 + 2.55)
+    slit = (x0 + 2.05, y0 + 2.55)
+    fixed = (x0 + 3.40, y0 + 2.55)
+    laptop = (x0 + 3.40, y0 + 1.45)
 
     add_projector(ax, projector)
-    ax.text(projector[0], projector[1] + 0.43, "projector", ha="center", fontsize=FONT_SMALL)
+    ax.text(
+        projector[0],
+        projector[1] + 0.43,
+        "projector",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
 
-    # Structured-illumination beam
-    add_beam(ax, (projector[0] + 0.30, projector[1]), (slit[0] - 0.15, slit[1]), COLOR_COMP, lw=2.5)
+    add_beam(
+        ax,
+        (projector[0] + 0.30, projector[1]),
+        (slit[0] - 0.15, slit[1]),
+        COLOR_COMP,
+        lw=2.5,
+    )
 
-    # Optional structured pattern cue: dotted modulation spots
     xs = np.linspace(projector[0] + 0.35, slit[0] - 0.30, 8)
-    ys = projector[1] + 0.10 * np.sin(np.linspace(0, 2*np.pi, xs.size))
+    ys = projector[1] + 0.10 * np.sin(np.linspace(0, 2 * np.pi, xs.size))
     ax.scatter(xs, ys, s=10, color=COLOR_COMP, alpha=0.7, zorder=4)
 
     add_double_slit(ax, slit)
-    ax.text(slit[0], slit[1] + 0.55, "double slit", ha="center", fontsize=FONT_SMALL)
+    ax.text(
+        slit[0],
+        slit[1] + 0.55,
+        "double slit",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
 
-    add_beam(ax, (slit[0] + 0.15, slit[1]), (fixed[0] - 0.25, fixed[1]), COLOR_A, lw=2.2)
+    add_beam(
+        ax,
+        (slit[0] + 0.15, slit[1]),
+        (fixed[0] - 0.25, fixed[1]),
+        COLOR_A,
+        lw=2.2,
+    )
     add_fixed_detector(ax, fixed)
-    ax.text(fixed[0], fixed[1] + 0.45, "fixed,\nnon-imaging", ha="center", fontsize=FONT_SMALL)
+    ax.text(
+        fixed[0],
+        fixed[1] + 0.45,
+        "fixed,\nnon-imaging",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
 
-    # Laptop / computer
     add_laptop(ax, laptop)
-    ax.text(laptop[0], laptop[1] - 0.50, "computer", ha="center", fontsize=FONT_SMALL)
+    ax.text(
+        laptop[0],
+        laptop[1] - 0.50,
+        "computer",
+        ha="center",
+        fontsize=FONT_SMALL,
+    )
 
-    # Connections
-    add_arrow(ax, (fixed[0], fixed[1]-0.3), (laptop[0], laptop[1] + 0.3), color="0.25", lw=1.4)
-    #ax.text(x0 + 3.95, y0 + 2.56, "known patterns", fontsize=FONT_SMALL, color=COLOR_COMP, ha="center")
-    # add_arrow(ax, (projector[0] + 0.05, projector[1] - 0.30), (laptop[0], laptop[1]), color=COLOR_COMP, lw=1.2)
+    add_arrow(
+        ax,
+        (fixed[0], fixed[1] - 0.3),
+        (laptop[0], laptop[1] + 0.3),
+        color="0.25",
+        lw=1.4,
+    )
 
-    #add_small_ghost_image(ax, (x0 + 4.50, y0 + 0.42))
-    add_panel_footer(ax, x0, y0 + 0.22, w, "The second optical arm becomes a calculation")
+    add_panel_footer(
+        ax,
+        x0,
+        y0 + 0.52,
+        w,
+        "The second optical arm becomes a\ncalculation",
+    )
 
 
-# ---------------------------------------------------------------------
-# Main figure
-# ---------------------------------------------------------------------
+# =============================================================================
+# FIGURE
+# =============================================================================
 
 def make_figure():
     fig, ax = plt.subplots(figsize=FIGSIZE, dpi=DPI)
@@ -573,10 +564,9 @@ def make_figure():
         weight="bold",
         color="0.15",
     )
-
     ax.text(
         7.5,
-        5.40,
+        5.30,
         "The same image survives while the hardware grows steadily less mysterious.",
         ha="center",
         va="center",
@@ -585,17 +575,19 @@ def make_figure():
     )
 
     y0 = 0.50
-    w = 4.55
-    h = 4.45
+    panel_w = 4.55
+    panel_h = 4.45
     gap = 0.225
 
-    draw_quantum_panel(ax, 0.35, y0, w, h)
-    draw_classical_panel(ax, 0.35 + w + gap, y0, w, h)
-    draw_computational_panel(ax, 0.35 + 2 * (w + gap), y0, w, h)
-
-    # progression arrows between panels
-    #add_arrow(ax, (4.97, 2.73), (5.28, 2.73), color="0.50", lw=1.6, mutation_scale=13)
-    #add_arrow(ax, (9.75, 2.73), (10.06, 2.73), color="0.50", lw=1.6, mutation_scale=13)
+    draw_quantum_panel(ax, 0.35, y0, panel_w, panel_h)
+    draw_classical_panel(ax, 0.35 + panel_w + gap, y0, panel_w, panel_h)
+    draw_computational_panel(
+        ax,
+        0.35 + 2 * (panel_w + gap),
+        y0,
+        panel_w,
+        panel_h,
+    )
 
     fig.tight_layout(pad=0.2)
     return fig
@@ -606,6 +598,7 @@ def main():
     fig.savefig(OUT_PNG, dpi=DPI, bbox_inches="tight")
     fig.savefig(OUT_PDF, bbox_inches="tight")
     plt.close(fig)
+
     print(f"Saved {OUT_PNG}")
     print(f"Saved {OUT_PDF}")
 

@@ -30,7 +30,7 @@ The photon whose position built up the interference pattern had never gone throu
 
 > **The photon that creates the interference pattern never passed through the slits. Its entangled partner did — and was detected by a device that recorded no image at all.**
 
-![ghost_imaging_far_field_schematic.png](ghost_imaging_far_field_schematic.png)
+![Figure_1](Figure_1.png)
 
 **Figure 1. The ghost double-slit experiment.** One photon passes through a double slit and reaches a fixed detector with no spatial resolution. Its entangled partner travels directly to a position-sensitive detector. Neither detector reveals an interference pattern by itself. The fringes appear only when the two detection records are correlated.
 
@@ -74,7 +74,7 @@ If a classical optical picture predicts the ghost so well, how much of the effec
 
 > **Unfold the entangled pair into a single classical light path, and ordinary optics predicts the ghost.**
 
-![klyshko_ghost_imaging_schematic.png](klyshko_ghost_imaging_schematic.png)
+![Figure_2](Figure_2.png)
 
 **Figure 2. The Klyshko picture.** Top: the two-photon ghost experiment. Bottom: replace the fixed detector with a light source and the SPDC crystal with a mirror. The two arms then unfold into a single classical optical path through the double slit to the camera.
 
@@ -102,11 +102,13 @@ Now the setup has collapsed to its essentials: a structured light source, the ob
 
 The ghost image survives.
 
-So does ghost interference: once the relevant optical fields or illumination patterns are known, diffraction information can be reconstructed as well [8,9].
+What survived all these transformations was the correlation. In the original experiment, the correlations between the two beams came from entangled photon pairs. In the classical experiment, correlated fluctuations in a speckle pattern could do the job instead. What matters for forming the ghost is that a fluctuation in one arm tells us something about the corresponding light in the other. Entanglement can make those correlations stronger than any classical source allows — particularly when complementary quantities such as position and momentum are considered together — but entanglement is not required simply to form the image [4,7,9,10].
 
-> **Remove the entanglement. Remove the second beam. Replace the camera with a calculation. The ghost image — and even the ghost interference — remains.**
+Even the word classical needs some care here. Thermal-light ghost imaging can be described quantitatively using classical electromagnetic fields and semiclassical photodetection [9]. Yet when the same light is analysed using quantum-information measures, quantum correlations such as discord can still be present, especially at low illumination [12]. So the boundary is not simply quantum photons versus classical light. It depends on what kind of correlation we ask the experiment to reveal.
 
-![ghost_imaging_three_stages.png](ghost_imaging_three_stages.png)
+> **Remove the entanglement. Remove the second beam. Replace the camera with a calculation. The ghost image remains.**
+
+![Figure_3](Figure_3.png)
 
 **Figure 3. Making the ghost classical.** Three stages of ghost imaging. Left: entangled photon pairs are measured in two arms. Centre: a beam splitter creates two classically correlated copies of a changing speckle pattern. Right: the second arm disappears entirely — known illumination patterns are projected onto the object, measured with a fixed, non-imaging detector and reconstructed by a computer.
 
