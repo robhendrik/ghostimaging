@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>article</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="who-needs-a-double-slit-anyway">Who Needs a Double Slit
+Anyway?</h1>
+<h3
+id="the-double-slit-experiment-is-the-most-famous-demonstration-in-quantum-physics.-what-happens-when-the-photon-making-the-fringes-never-passes-through-either-slit"><em>The
+double-slit experiment is the most famous demonstration in quantum
+physics. What happens when the photon making the fringes never passes
+through either slit?</em></h3>
+<hr />
+<figure>
+<img src="Feature_image.png" alt="Feature_image" />
+<figcaption aria-hidden="true">Feature_image</figcaption>
+</figure>
+<p><em>Interference pattern from a double slit. Simulation by
+author.</em></p>
+<p><em>Alt text: Blue-white double-slit interference pattern on a black
+background, with a bright central maximum and symmetric
+fringes.</em></p>
+<p>Every popular account of quantum mechanics eventually reaches the
+same climax. Send photons one at a time toward a pair of slits. Each
+photon arrives as a single dot on a screen. But after thousands of them,
+an interference pattern builds up — bright and dark bands that seem to
+require each photon to have somehow explored both paths.</p>
+<p>As a physics student, I learned the double slit from textbooks, where
+the logic is wonderfully clean. A laboratory is less tidy.</p>
+<p>Imagine removing the slits from the path of the photon that makes the
+pattern.</p>
+<hr />
+<h2 id="the-photon-that-never-saw-the-slits">The Photon That Never Saw
+the Slits</h2>
+<p>In 1995, physicists demonstrated something that looked almost
+impossible. Entangled photon pairs could produce an image at a detector
+whose photons had never interacted with the object at all [1].</p>
+<p>The effect became known as <strong>ghost imaging</strong>, because of
+its strange division of labour. The light that touches the object is
+detected without forming an image, while the detector that does form the
+image receives light that never touched the object. The image exists
+only in the correlations between the two detection records.</p>
+<p>That same year, another experiment pushed the idea into more familiar
+territory: replace the object with a double slit [2].</p>
+<p>One photon passed through the slits and was collected by a detector
+with no spatial resolution — a fixed detector that merely registered
+whether a photon arrived. Its entangled partner travelled along a
+separate path to a position-sensitive detector.</p>
+<p>Neither detector showed an interference pattern on its own.</p>
+<p>But when the two detection records were compared, and only coincident
+events were kept, fringes appeared.</p>
+<p>The photon whose position built up the interference pattern had never
+gone through either slit.</p>
+<blockquote>
+<p><strong>The photon that creates the interference pattern never passed
+through the slits. Its entangled partner did — and was detected by a
+device that recorded no image at all.</strong></p>
+</blockquote>
+<figure>
+<img src="Figure_1.png" alt="Figure_1" />
+<figcaption aria-hidden="true">Figure_1</figcaption>
+</figure>
+<p><strong>Figure 1. The ghost double-slit experiment.</strong> One
+photon passes through a double slit and reaches a fixed detector with no
+spatial resolution. Its entangled partner travels directly to a
+position-sensitive detector. Neither detector reveals an interference
+pattern by itself. The fringes appear only when the two detection
+records are correlated. Image by author.</p>
+<p><em>Alt text: Schematic of a ghost interference experiment. A source
+produces entangled photon pairs. One path contains a double slit
+followed by a single-pixel fixed detector. The other path leads to a
+scanning detector. An arrow labelled “coincidences” connects the two
+detectors to a graph showing an interference pattern.</em></p>
+<hr />
+<h2 id="the-oldest-rule-still-applies">The Oldest Rule Still
+Applies</h2>
+<p>Anyone who knows the double-slit experiment also knows its most
+famous rule: find out which slit the photon went through, and the
+interference disappears.</p>
+<p>The ghost version obeys the same rule, but now across two
+photons.</p>
+<p>If the detection behind the slits is changed so that the measurement
+reveals which slit the first photon passed through, the fringes in the
+coincidence pattern disappear [3]. Nothing has changed in the other arm.
+The photon recorded there still never encounters the slits.</p>
+<p>What changed is the information available in the joint
+measurement.</p>
+<p>In the ordinary double-slit experiment, the path information and the
+fringes belong to the same photon. In the ghost experiment, the path
+information is recorded on one side, and the interference pattern
+appears on the other — yet the same trade-off survives.</p>
+<p>The old quantum rule is still valid. It is just enforced
+nonlocally.</p>
+<blockquote>
+<p><strong>Which-path information kills interference — even when the
+path is here and the fringes are there.</strong></p>
+</blockquote>
+<hr />
+<h2 id="how-does-the-ghost-know-about-the-slits">How Does the Ghost Know
+About the Slits?</h2>
+<p>Klyshko [4,5] gives an elegant way to see why the experiment
+works.</p>
+<p>Imagine running one arm of the experiment backwards. Replace the
+fixed detector with a light source and the nonlinear crystal with a
+mirror. Light now travels from the detector side, back through the
+double slit, reflects from the mirror, and continues along the second
+arm to the camera.</p>
+<p>The strange two-photon experiment has unfolded into an ordinary
+optical system.</p>
+<p>And that ordinary system reproduces the geometry and interference
+behaviour of the ghost experiment [4,5].</p>
+<p>The Klyshko picture does not mean that a photon literally travels
+backwards in time. It is a calculational picture — but a remarkably
+useful one. Image position, magnification, and diffraction can suddenly
+be understood with familiar optics.</p>
+<p>Which makes the next question difficult to avoid. If a classical
+optical picture predicts the ghost so well, how much of the effect is
+really quantum?</p>
+<blockquote>
+<p><strong>Unfold the entangled pair into a single classical light path,
+and ordinary optics predicts the ghost.</strong></p>
+</blockquote>
+<figure>
+<img src="Figure_2.png" alt="Figure_2" />
+<figcaption aria-hidden="true">Figure_2</figcaption>
+</figure>
+<p><strong>Figure 2. The Klyshko picture.</strong> Top: the two-photon
+ghost experiment. Bottom: replace the fixed detector with a light source
+and the SPDC crystal with a mirror. The two arms then unfold into a
+single classical optical path through the double slit to the camera.
+Image by author.</p>
+<p><em>Alt text: Top: the two-photon ghost experiment. Bottom: replace
+the fixed detector with a light source and the SPDC crystal with a
+mirror, and the two arms unfold into a single classical optical path
+from the source, through the double slit, to the camera. The ordinary
+optical system reproduces the geometry of the ghost experiment.</em></p>
+<hr />
+<h2 id="then-the-entanglement-became-optional">Then the Entanglement
+Became Optional</h2>
+<p>So, how much of this effect is actually quantum? As it turns out,
+entanglement is not required to make a ghost image.</p>
+<p>Take a laser and pass it through a rotating ground-glass screen. The
+result is a constantly changing speckle pattern. Split that pattern into
+two correlated copies with a beam splitter. Send one copy through the
+object to a fixed detector, and record the other with a camera.</p>
+<p>Neither measurement is useful on its own. But correlate the detector
+signal with the recorded speckle patterns, and the image appears [6,7].
+No entangled photons are involved.</p>
+<p>Then researchers removed even more of the apparatus.</p>
+<p>If the illumination patterns are generated deliberately with a
+spatial light modulator, the computer already knows exactly what was
+projected. The second beam no longer has to be measured at all
+[8,9].</p>
+<p>Now the setup has collapsed to its essentials: a structured light
+source, the object, a single-pixel detector, and a computer.</p>
+<p>The ghost image is still there.</p>
+<p>What survived all these transformations was the correlation. In the
+original experiment, the correlations between the two beams came from
+entangled photon pairs. In the classical experiment, correlated
+fluctuations in a speckle pattern could do the job instead. What matters
+for forming the ghost is that a fluctuation in one arm tells us
+something about the corresponding light in the other. Entanglement can
+make those correlations stronger than any classical source allows —
+particularly when complementary quantities such as position and momentum
+are considered together — but entanglement is not required to form the
+image [4,7,9,10].</p>
+<p>Even the word classical needs some care here. Thermal-light ghost
+imaging can be described quantitatively using classical electromagnetic
+fields and semiclassical photodetection [9]. Yet when the same light is
+analysed using quantum-information measures, quantum correlations such
+as discord can still be present, especially at low illumination [12]. So
+the boundary is not simply quantum photons versus classical light. It
+depends on what kind of correlation we ask the experiment to reveal.</p>
+<blockquote>
+<p><strong>Remove the entanglement. Remove the second beam. Replace the
+camera with a calculation. The ghost image remains.</strong></p>
+</blockquote>
+<figure>
+<img src="Figure_3.png" alt="Figure_3" />
+<figcaption aria-hidden="true">Figure_3</figcaption>
+</figure>
+<p><strong>Figure 3. Making the ghost classical.</strong> Three stages
+of ghost imaging. Left: entangled photon pairs are measured in two arms.
+Centre: a beam splitter creates two classically correlated copies of a
+changing speckle pattern. Right: the second arm disappears entirely —
+known illumination patterns are projected onto the object, measured with
+a fixed, non-imaging detector and reconstructed by a computer. Image by
+author.</p>
+<p><em>Alt text: Three-panel diagram showing the progression from
+quantum to computational ghost imaging. In the left panel, an SPDC
+source produces entangled photon pairs; one photon passes through the
+object to a fixed, non-imaging detector while the other is detected
+spatially. In the centre panel, a beam splitter divides a random speckle
+field into two classically correlated beams, again using a fixed
+detector and a spatial detector. In the right panel, a projector sends
+known structured illumination patterns onto the object, a single fixed
+detector measures the transmitted light, and a computer reconstructs the
+image without a second optical arm.</em></p>
+<hr />
+<h2 id="but-where-did-the-quantum-go">But Where Did the Quantum Go?</h2>
+<p>So ghost imaging works without entanglement. Ghost interference can
+be reproduced without it too.</p>
+<p>Case closed?</p>
+<p>Not quite.</p>
+<p>The ghost image itself is not the quantum test, but there is a more
+subtle distinction which appears when we ask more of the experiment.</p>
+<p>D’Angelo and colleagues, for example, did not identify entanglement
+simply because they could produce a ghost image or an interference
+pattern. They used the same photon pairs to probe correlations in both
+position and momentum, and showed that the simultaneous strength of
+those correlations satisfied an EPR-type entanglement criterion
+[10].</p>
+<blockquote>
+<p>The ghost image is not the quantum test. The physics lies in what the
+correlations allow us to learn.</p>
+</blockquote>
+<p>That is a much more demanding statement.</p>
+<p>A classical system can reproduce a ghost image. It can reproduce
+ghost interference. But entangled photon pairs can possess exceptionally
+strong correlations in complementary spatial variables at once — the
+spatial version of the EPR correlations that made entanglement famous in
+the first place [4,10].</p>
+<p>Ghost imaging has evolved from entangled photon pairs, through
+classically correlated speckle, to computational systems in which known
+illumination patterns interrogate an object one measurement at a time
+[8,9].</p>
+<p>Recent work pushes the idea one step further. Instead of merely
+asking which patterns reconstruct an image, researchers are treating
+ghost imaging explicitly as an <strong>information-acquisition
+problem</strong>: use what has already been measured to choose the next
+illumination pattern so that the next detector result tells us as much
+as possible about what remains unknown [11].</p>
+<p>The original mystery has therefore changed.</p>
+<p>The question is no longer simply:</p>
+<p><em>How can a camera image something its photons never
+touched?</em></p>
+<p>It is:</p>
+<p><em>What kinds of correlations, and what kinds of information, can an
+imaging system exploit — and when does quantum physics actually let us
+learn more?</em></p>
+<p>As a student, the boundary between classical and quantum physics
+looked clean in the textbooks. Ghost imaging is a good reminder that
+Nature is in reality a lot more interesting.</p>
+<hr />
+<h2 id="references">References</h2>
+<p>[1] T. B. Pittman, Y. H. Shih, D. V. Strekalov, and A. V. Sergienko,
+“Optical imaging by means of two-photon quantum entanglement,”
+<em>Physical Review A</em> <strong>52</strong>, R3429 (1995).</p>
+<p>[2] D. V. Strekalov, A. V. Sergienko, D. N. Klyshko, and Y. H. Shih,
+“Observation of two-photon ‘ghost’ interference and diffraction,”
+<em>Physical Review Letters</em> <strong>74</strong>, 3600 (1995).</p>
+<p>[3] P. Chingangbam and T. Qureshi, “Ghost interference and quantum
+erasure,” <em>Progress of Theoretical Physics</em> <strong>127</strong>,
+383–392 (2012).</p>
+<p>[4] M. J. Padgett and R. W. Boyd, “An introduction to ghost imaging:
+quantum and classical,” <em>Philosophical Transactions of the Royal
+Society A</em> <strong>375</strong>, 20160233 (2017).</p>
+<p>[5] T. B. Pittman, D. V. Strekalov, D. N. Klyshko, M. H. Rubin, A. V.
+Sergienko, and Y. H. Shih, “Two-photon geometric optics,” <em>Physical
+Review A</em> <strong>53</strong>, 2804 (1996).</p>
+<p>[6] R. S. Bennink, S. J. Bentley, and R. W. Boyd, “‘Two-photon’
+coincidence imaging with a classical source,” <em>Physical Review
+Letters</em> <strong>89</strong>, 113601 (2002).</p>
+<p>[7] A. Gatti, E. Brambilla, M. Bache, and L. A. Lugiato, “Ghost
+imaging with thermal light: comparing entanglement and classical
+correlation,” <em>Physical Review Letters</em> <strong>93</strong>,
+093602 (2004).</p>
+<p>[8] J. H. Shapiro, “Computational ghost imaging,” <em>Physical Review
+A</em> <strong>78</strong>, 061802(R) (2008).</p>
+<p>[9] B. I. Erkmen and J. H. Shapiro, “Ghost imaging: from quantum to
+classical to computational,” <em>Advances in Optics and Photonics</em>
+<strong>2</strong>, 405–450 (2010).</p>
+<p>[10] M. D’Angelo, Y.-H. Kim, S. P. Kulik, and Y. Shih, “Identifying
+entanglement using quantum ‘ghost’ interference and imaging,”
+<em>Physical Review Letters</em> <strong>92</strong>, 233601 (2004).</p>
+<p>[11] J. Sun, C. Hu, Z. Bo, Z. Liu, M. Chen, L. Du, W. Liu, and S.
+Han, “Adaptive information-maximization encoding for ghost imaging — A
+general Bayesian framework under experimental physical constraints,”
+arXiv:2601.15604v2 (2026).</p>
+</body>
+</html>
